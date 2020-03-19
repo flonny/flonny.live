@@ -6,7 +6,8 @@ module.exports = {
   themeConfig: {
     smoothScroll: true,
     nav: [
-      { text: '前端', link: '/javascript/' },
+      { text: 'JavaScript', link: '/javascript/' },
+      { text: 'CSS', link: '/css/' },
       { text: 'Flutter', link: '/flutter/' },
       { text: '笔记', link: '/notes/' },
       { text: 'github', link: 'https://github.com/flonny', target: '_blank', rel: '' },
@@ -21,6 +22,16 @@ module.exports = {
           children: [
             '',
             'worker',
+          ]
+        }
+      ],
+      '/css/': [
+        {
+          title: 'CSS',
+          collapsable: false,
+          sidebarDepth: 2,
+          children: [
+            '',
           ]
         }
       ]
