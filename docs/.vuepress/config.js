@@ -1,5 +1,5 @@
 module.exports = {
-  title: '苦作舟',
+  title: '之风',
   description: "flonny.live",
   lastUpdated: 'Last Updated',
 
@@ -21,7 +21,10 @@ module.exports = {
           sidebarDepth: 2,
           children: [
             '',
-            'worker',
+            'javascript',
+            'css',
+            'worker'
+
           ]
         }
       ],

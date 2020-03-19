@@ -22,6 +22,3 @@ margin 的折叠出现在以下情况中
 1. **文档流**中的页面上**相邻的上下**两个元素，这两个元素不能为行内元素(display不能为 inline、inline-block、inline-flex、inline-table).
 2. 没有内容将父元素和子元素隔离
 3. 空的块级元素的上下外边距
-
-# JavaScript
-## 2020/3/19
