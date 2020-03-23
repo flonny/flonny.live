@@ -14,6 +14,17 @@ module.exports = {
     ],
     sidebar: {
       sidebarDepth: 2,
+      '/javascript/': [
+        {
+          title: 'JavaScript',
+          collapsable: false,
+          sidebarDepth: 2,
+          children: [
+            '',
+            'vue-next'
+          ]
+        }
+      ],
       '/notes/': [
         {
           title: '笔记',
