@@ -21,7 +21,8 @@ module.exports = {
           sidebarDepth: 2,
           children: [
             '',
-            'vue-next'
+            'vue-next',
+            'webpack'
           ]
         }
       ],
