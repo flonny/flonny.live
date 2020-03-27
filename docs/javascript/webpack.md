@@ -173,7 +173,102 @@ module.exports = {
   npm run build
   ```
 
-  
 
-  
 
+
+### webpack 基础概念
+
+- 多页面配置
+  - entry 指定打包地址
+  - output 指定打包输出地址
+
+webpack 构建机制,所有资源都是模块,模块之间存在依赖关系,webpack 进行模块的打包.
+
+模块的依赖关系形成依赖树,webpack 会遍历这个依赖树,将遇到的依赖模块加入到依赖图中,遍历完成之后进行打包并输出
+
+webpack  多页面配置需要在webpack.config.js 中的 entry 和 output 进行配置
+
+entry配置 与 output配置
+
+> 在 entry 中使用键值对的方式来指定页面打包后的文件名
+>
+> output 中filename 需要使用[name] 占位符 进行命名
+>
+> 注: [name] 是固定写法 
+
+```javascript
+const path = require('path')
+module.exports = {
+  mode: 'production',
+  entry: {
+    index: './src/index.js',
+    search: './src/search.js'
+  },
+  output: {
+    path: path.join(__dirname,'dist'),
+    filename: "[name].js"
+  }
+}
+
+```
+
+
+
+- Loaders 概念
+
+  由于webpack  原生只支持 js 和 json两种文件类型, 对于css , css预处理器,jsx ,vue ,typescript等需要通过Loaders 去将其转化为可用的模块,加入依赖图中
+
+  Loaders 本身是一个函数,接收源文件作为参数,输出可用模块
+
+- Plugins 概念
+
+  增强loaders 功能, 代码优化,资源管理,环境注入
+
+  Plugins 作用与整个构建过程
+
+- mode 概念
+
+  mode 用来指定webpack当前构建环境,webpack 4 新概念
+
+  mode 有三个值,production development none
+
+  设置成不同值会自动触发webpack的内置函数
+
+  设置为none webpack不会对此作出响应
+
+
+
+### webpack 实践
+
+#### 解析es6 和 jsx
+
+解析es6 代码需要用的 babel-loader 和 @babel/perset-env 预设
+
+babel-loader  的配置文件为 .babelrc 
+
+```javascript
+npm i @babel/core @babel/preset-env babel-loader
+```
+
+```javascript
+{
+  "presets": ["@babel/preset-env"]
+}
+```
+
+简析react 需要@babel/preset-react 预设
+
+```javascript
+npm install react react-dom
+```
+
+```json
+{
+  "presets":[
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
+}
+```
+
+配置完成之后便能使用react 进行开发了
