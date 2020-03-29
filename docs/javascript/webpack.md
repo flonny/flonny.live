@@ -1,3 +1,5 @@
+
+
 # webpack
 
 ## 为什么使用 webpack
@@ -271,4 +273,116 @@ npm install react react-dom
 }
 ```
 
+在webpack 配置
+
+```javascript
+const path = require("path");
+
+module.exports = {
+  mode: "production",
+  entry: "./src/index.js",
+  output: {
+    path: path.join(__dirname, "dist"),
+    filename: "index.js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader'
+      }
+    ]
+  }
+};
+
+```
+
+
+
 配置完成之后便能使用react 进行开发了
+
+### webpack 处理css less
+
+css-loader
+
+加载 .css 文件,再代码中遇到引用css文件,css-loader 会加载css文件并转化为commonjs 对象
+
+将样式
+
+style-loader 是将css 文件插入到dom中
+
+> 注⚠️: loader 是链式调用,调用顺序从右到左
+
+安装css-loader 和 style-loader
+
+```shell
+npm i css-loader style-loader -D
+```
+
+webpack 配置
+
+```javascript
+const path = require("path");
+
+module.exports = {
+  mode: "production",
+  entry: "./src/index.js",
+  output: {
+    path: path.join(__dirname, "dist"),
+    filename: "index.js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ]
+      }
+    ]
+  }
+};
+
+```
+
+处理less 需要安装less-loader 并添加到配置文件当中
+
+```javascript
+{
+  test: /\.less$/,
+  use: {
+    'style-loader',
+    'css-loader',
+    'less-loader', 
+  }
+}
+```
+
+执行顺序为 less-loader => css-loader => style-loader
+
+### webpack 处理图片和字体
+
+使用 flie-loader 解析图片和字体(都不是代码文件)
+
+```javascript
+// other code
+rules: [
+  // other code
+  {
+    test: /\.(jpg|png|gif)$/,
+    use: 'file-loader'
+  },
+  {
+    test: /\.(eot|woff|tff|woff2)$/,
+    use: 'file-loader'
+  }
+]
+```
+
+
+
