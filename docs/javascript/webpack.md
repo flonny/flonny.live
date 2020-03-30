@@ -384,5 +384,47 @@ rules: [
 ]
 ```
 
+### webpack 文件监听
 
+webpack 文件监听主要有两种方式
+
+​	这两种方式浏览器都不会自动涮刷新
+
+1. 在webpack 命令后加上 --watch 指令
+
+   ```json
+   {
+     "script":{
+       "build": "webpack --watch"
+     }
+   }
+   ```
+
+   
+
+2. 在webpack.config.js中添加watch配置项
+
+```javascript
+module.exports ={
+  watch: true
+}
+```
+
+webpack 会轮询的判断文件最后编辑世界是否发生变化
+
+文件第一次发生变化,webpack 并不会直接重新构造,它会等待一段时间 aggregateTimeout(默认300ms),在这期间文件发生的改变都会被webpack缓存起来,等到aggregateTimeout 之后一起汇总重新构造
+
+watchOption 可配置watch 的一些行为
+
+```javascript
+module.exports = {
+  watch: true,
+  // 必须watch 为true
+  watchOption: {
+    ignored: /node_modules/, // 忽略监听文件,提高性能
+    aggregateTimeout: 300, // 缓冲时间 节流时间
+    poll: 1000 //每秒轮询次数
+  }
+}
+```
 
