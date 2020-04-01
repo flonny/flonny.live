@@ -1,7 +1,3 @@
-
-
-# webpack
-
 ## 为什么使用 webpack
 
 从功能上说:
@@ -425,6 +421,196 @@ module.exports = {
     aggregateTimeout: 300, // 缓冲时间 节流时间
     poll: 1000 //每秒轮询次数
   }
+}
+```
+
+### webpack 热更新
+
+使用 webpack-dev-server
+
+需要安装 webpack-dev-server
+
+```javascript
+npm i webpack-dev-server -D
+```
+
+使用 WDS可以不刷新浏览器,更新内容
+
+WDS 没有磁盘iO 他构建的文件放在内存中,而不是和build watch 那样放到硬盘中
+
+WDS 在开发环境使用, 不在生产环境使用 
+
+WDS 需要配合 webpck 自带的插件 HotModuleReplacementPlugin 使用
+
+package.json 配置
+
+```json
+"scripts": {
+  "dev": "webpack-dev-server --open" // --open 自动打开浏览器
+}
+```
+
+webpack.config.js
+
+```javascript
+
+const webpack = require('webpack');
+module.exports ={
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devServer: {
+    contentBase: './dist',
+    hot: true
+  }
+}
+```
+
+webpack 还可以使用webpack-dev-middleware
+
+更加灵活,需要自己创建node-server 
+
+webpack-dec-middleware 可以将构建文件传给服务器
+
+- [ ] #### webpack 热更新原理
+
+### 文件指纹
+
+通常用来作为版本管理, 缓存优化
+
+文件指纹
+
+1. hash
+
+    和整个项目构建相关, 只要项目文件有修改,整个项目构建的hash值就会更改
+
+2. chunkhash 
+
+   > chunkhash 不能和插件 HotModuleReplacementPlugin 一起使用
+   >
+   > 一起使用会保报错
+   >
+   > 报错信息
+
+   ```javascript
+   Cannot use [chunkhash] or [contenthash] for chunk in '[name]_[chunkhash:8].js' (use [hash] instead)
+   ```
+
+   
+
+   和webpack打包的chunk相关,不同的entry会生成不同的chunkhash值
+
+3. contenthash
+
+   根据内容定义hash文件内容不变,则contenthash不变
+
+#### 占位符
+
+| 占位符名称    | 含义                        |
+| :------------ | --------------------------- |
+| [ext]         | 资源后缀名                  |
+| [name]        | 文件名称                    |
+| [path]        | 文件的相对路径              |
+| [floder]      | 文件所在文件夹              |
+| [contenthash] | 文件内容的hash, 默认md5生成 |
+| [hash]        | 项目构建hash                |
+| [emoji]       | 一个随机内容的emoji         |
+| [chunkhash]   | 和webpack 打包相关的hash    |
+
+#### js 的hash 设置
+
+```javascript
+output: {
+  path: path.join(__dirname,'dist'),
+  name: "[name]_[chunkhash:8].js"
+}
+```
+
+#### 文件的hash设置
+
+```javascript
+module.exports ={
+  module: [
+    {
+      test: /\.(woff|woff2|eot|jpg|png|gif|svg)$/,
+      use: {
+        loader: "file-loader",
+        name: "[name][hash:8].[ext]"
+      }
+    }
+  ]
+}
+```
+
+#### css 的hash 设置
+
+如果要设置css 的文件指纹,那么需要一个插件 mini-css-extract-plugin来进行css 文件提取. 只能在webpack 4 中运行, 而且MiniCssExtractPlugin 功能和 style-loader 功能冲突,所以如果需要使用MiniCssExtractPlugin 那么需要将style-loader 在配置中删除
+
+>  官方描述: 该插件将CSS提取到单独的文件中。它为每个包含CSS的JS文件创建一个CSS文件
+
+文件配置
+
+```javascript
+npm i mini-css-extarct-plugin cssnano -D
+```
+
+```javascript
+const MiniCssExtractPlugin = require('mini-css-extarct-plugin')
+module.exports = {
+  module: [
+    {
+      test: /\.css$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader'
+      ]
+    }
+  ],
+  plugins: [
+    new MiniCssExtarctPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano')
+    })
+  ]
+}
+```
+
+
+
+### 代码压缩 HTML CSS JAVASCRIPT
+
+减少打包体积
+
+#### JavaScript 压缩
+
+webpack4 内置的 uglifyjs-webpack-plugin ,默认打包的文件是压缩过的
+
+#### CSS 代码压缩
+
+使用 optimize-css-assets-webpack-plugin 同时使用 cssnano
+
+#### HTML 代码压缩
+
+使用 html-webpack-plugin, 设置压缩参数
+
+配置
+
+```javascript
+npm i html-webpack-plugin -D
+```
+
+```javascript
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname,'./src/index.html'),
+      filename: 'index.html',
+      chunks: ['index'],
+      inject: true,
+      minify: true
+    })
+  ]
 }
 ```
 
