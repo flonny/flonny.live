@@ -10,6 +10,7 @@ module.exports = {
       { text: 'CSS', link: '/css/' },
       { text: 'Flutter', link: '/flutter/' },
       { text: '笔记', link: '/notes/' },
+      { text: '素材', link: '/material/' },
       { text: 'github', link: 'https://github.com/flonny', target: '_blank', rel: '' },
     ],
     sidebar: {
@@ -25,6 +26,7 @@ module.exports = {
           ]
         }
       ],
+
       '/notes/': [
         {
           title: '笔记',
@@ -48,7 +50,17 @@ module.exports = {
             '',
           ]
         }
-      ]
+      ],
+      '/material/': [
+        {
+          title: '素材',
+          collapsable: false,
+          sidebarDepth: 2,
+          children: [
+            ''
+          ]
+        }
+      ],
     }
   },
   plugins: [
