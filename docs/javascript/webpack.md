@@ -1,34 +1,22 @@
-## 为什么使用 webpack
+## 为什么使用 *webpack*
 
 从功能上说:
 
-转化 ES6 的语法
+*webpack* 可以转化 *ES6* 的语法, 转化框架的语法糖如 *jsx*.  可以使用 *css* 预处理器 并且 *css* 自动添加前缀，解决部分兼容性问题. 进行代码的压缩. 进行文件处理
 
-转化框架的语法糖如jsx
+从生态上说:
 
-CSS自动添加前缀，使用css预处理器
+*Webpack* 是目前最流行的前端构建工具，社区活跃, 官方插件和第三方插件丰富, 配置灵活，生态成熟
 
-代码混淆，压缩
 
-图片的压缩，混淆
 
-从生态上说
-
-Webpack 是目前最流行的前端构建工具，
-
-Webpack社区活跃
-
-官方插件和第三方插件比较多
-
-配置灵活，生态成熟
-
-## webpack基础
+## *webpack* 基础
 
 ### 配置文件
 
-Webpack 的默认配置文件为 Webpack.config.js
+*webpack* 的默认配置文件为 *webpack.config.js*
 
-可以通过 webpack --config 制定webpack 的默认配置文件。可以在不同场景使用不同的配置文件 
+可以通过 *`webpack --config`* 制定 webpack 的默认配置文件。可以在不同场景使用不同的配置文件
 
 ```javascript
 module.exports = {
@@ -48,9 +36,9 @@ module.exports = {
 }
 ```
 
-webpack 4.0 零配置文件
+*webpack 4.0* 零配置文件
 
-> webpack 4 中 它将内核和cli 进行了分割 所以安装的时候要分别安装
+> *webpack 4* 中 它将内核和 *cli* 进行了分割 所以安装的时候要分别安装
 
 ```javascript
 module.exports = {
@@ -59,9 +47,9 @@ module.exports = {
 }
 ```
 
-### 安装webpack
+### 安装 *webpack*
 
-- 安装nvm[https://github.com/nvm-sh/nvm]
+- 安装 *nvm*[https://github.com/nvm-sh/nvm]
 
   ```javascript
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
@@ -73,7 +61,7 @@ module.exports = {
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
   ```
 
-- 安装node
+- 安装 *node*
 
   ```javascript
   nvm install v10.15.3
@@ -81,11 +69,11 @@ module.exports = {
   npm -v
   ```
 
-- 安装webpack
+- 安装 *webpack*
 
-  > -y 默认选yes
+  > *`-y`*  是所有选项选择 *yes*
   >
-  > --save-dev 依赖安装到 devDependencies 不是 dependencies. webpack 是开发依赖
+  > *`--save-dev`* 依赖安装到 *devDependencies(开发依赖)* 不是 *dependencies(运行依赖)*. 
 
   ```javascript
   npm init -y
@@ -95,9 +83,9 @@ module.exports = {
 
 
 
-### 简单的 webpack 项目
+### 简单的 *webpack* 项目
 
-- 在安装完webpack 的文件夹中新建目录src,并添加两个js 文件
+- 在安装完 *webpack* 的文件夹中新建目录 *src*,并添加两个 *js* 文件
 
   ```shell
   mkdir src
@@ -106,7 +94,7 @@ module.exports = {
   touch helloworld.js
   ```
 
-  helloworld.js
+  *helloworld.js*
 
   ```javascript
   export defalut function helloworld() {
@@ -114,16 +102,16 @@ module.exports = {
   }
   ```
 
-  Index.js
+  *Index.js*
 
   ```javascript
   import helloworld from './helloworld'
   document.write(helloworld())
   ```
 
-- 在根目录下新建 webpack.config.js 文件 并打包
+- 在根目录下新建 *webpack.config.js* 文件 并打包
 
-  Webpack.config.js
+  *webpack.config.js* 配置
 
   ```javascript
   "use strict";
@@ -140,33 +128,37 @@ module.exports = {
 
   打包
 
-  > 在 dist 下会出现bundle.js
+  使用下面👇的命令开始打包
 
   ```javascript
   ./node_modules/.bin/webpack
   ```
 
-  在 dist 中新建index.html 并引入bundle.js ，在浏览器中打开index.html， 在页面中会显示hello world
+  在 *webpack.config.js* 中, 设置了dist 为输出目录, 输出文件名叫做 *bundle.js*, 所以打包成功的话会在dist 文件夹中生成 *bundle.js* 文件
+
+  如果想要 **执行** *bundle.js* 文件, 可以在 dist 中新建 *index.html* 并引入 *bundle.js* 
+
+  在**浏览器 **中打开*index.html*， 在页面中会显示 *hello world*
 
   
-
-  通过npm script 运行打包命令
-
-  > 在项目局部安装依赖时，如果依赖会创建命令，那么便会在./node_modules/.bin/ 创建软链接
-  >
-  > package.json 默认会访问这个目录寻找命令执行
-  >
-  > 所以在 package.json 的scripts 中添加命令
-
-  增加 build 命令，指定为webpack
-
+  
+  通过 *npm script* 运行打包命令
+  
+  > 在项目局部安装依赖时，如果依赖会**创建命令**，那么便会在  *./node_modules/.bin/*  创建**软链接**
+>
+  > *package.json* 默认会访问这个目录寻找命令执行
+>
+  > 所以在 *package.json* 的 *scripts* 中添加命令
+  
+  增加 *build* 命令，指定为 *webpack*
+  
   ```
     "scripts": {
-      "build": "webpack",
+    "build": "webpack",
       "test": "echo \"Error: no test specified\" && exit 1"
     }
   ```
-
+  
   ```javascript
   npm run build
   ```
@@ -174,25 +166,25 @@ module.exports = {
 
 
 
-### webpack 基础概念
+### *webpack* 基础概念
 
 - 多页面配置
-  - entry 指定打包地址
-  - output 指定打包输出地址
+  - *entry* 指定打包地址
+  - *output* 指定打包输出地址
 
-webpack 构建机制,所有资源都是模块,模块之间存在依赖关系,webpack 进行模块的打包.
+*webpack* **构建机制**,所有资源都是**模块**, 模块之间存在**依赖关系**, *webpack* 对模块进行打包.
 
-模块的依赖关系形成依赖树,webpack 会遍历这个依赖树,将遇到的依赖模块加入到依赖图中,遍历完成之后进行打包并输出
+模块的依赖关系形成**依赖树**,  *webpack* 会遍历这个依赖树, **将遇到的依赖模块加入到依赖图中**,  遍历完成之后进行打包并输出
 
-webpack  多页面配置需要在webpack.config.js 中的 entry 和 output 进行配置
+*webpack*  多页面配置需要在 *webpack.config.js* 中的 *entry* 和 *output* 进行配置
 
-entry配置 与 output配置
+*entry* 配置 与 *output*配置
 
-> 在 entry 中使用键值对的方式来指定页面打包后的文件名
+> 在 *entry* 中使用键值对的方式来指定页面打包后的文件名
 >
-> output 中filename 需要使用[name] 占位符 进行命名
+> *output* 中 *filename* 需要使用 *[name]* 占位符 进行命名
 >
-> 注: [name] 是固定写法 
+> 注: *[name]* 是固定写法 
 
 ```javascript
 const path = require('path')
@@ -210,29 +202,27 @@ module.exports = {
 
 ```
 
+- *Loaders* 概念
 
+  由于*webpack*  原生只支持 *js* 和 *json*两种文件类型, 对于*css* , *css*预处理器,  *jsx* ,*vue* ,*typescript*等需要通过*Loaders* 去将其转化为可用的模块,加入依赖图中
 
-- Loaders 概念
+  *Loaders* 本身是一个函数,接收源文件作为参数,输出可用模块
 
-  由于webpack  原生只支持 js 和 json两种文件类型, 对于css , css预处理器,jsx ,vue ,typescript等需要通过Loaders 去将其转化为可用的模块,加入依赖图中
+- *Plugins* 概念
 
-  Loaders 本身是一个函数,接收源文件作为参数,输出可用模块
+  增强 *loaders* 功能, 代码优化,资源管理,环境注入
 
-- Plugins 概念
+  *Plugins* 作用与整个构建过程
 
-  增强loaders 功能, 代码优化,资源管理,环境注入
+- *mode* 概念
 
-  Plugins 作用与整个构建过程
+  *mode* 用来指定*webpack*当前构建环境, *webpack 4* 新概念
 
-- mode 概念
+  *mode* 有三个值, *production* *development* *none*
 
-  mode 用来指定webpack当前构建环境,webpack 4 新概念
+  设置成不同值会自动触发 *webpack* 的内置函数
 
-  mode 有三个值,production development none
-
-  设置成不同值会自动触发webpack的内置函数
-
-  设置为none webpack不会对此作出响应
+  设置为 *none* *webpack* 不会对此作出响应
 
 
 
@@ -568,8 +558,7 @@ module.exports = {
   ],
   plugins: [
     new MiniCssExtarctPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano')
+       filename: "[name]_[contenthash:8].css"
     })
   ]
 }
@@ -588,6 +577,20 @@ webpack4 内置的 uglifyjs-webpack-plugin ,默认打包的文件是压缩过的
 #### CSS 代码压缩
 
 使用 optimize-css-assets-webpack-plugin 同时使用 cssnano
+
+```javascript
+const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+module.exports = {
+  plugins: {
+    new optimizeCssAssetsPlugin({
+    	assetNameRegExp: /\.css$/g,
+    	cssProccesor: 'cssnano'
+  	})
+  }
+}
+```
+
+
 
 #### HTML 代码压缩
 
@@ -614,3 +617,71 @@ module.exports = {
 }
 ```
 
+## webpack 进阶
+
+
+
+### 自动清理构建目录
+
+使用 *clean-webpack-plugin* 自动清理构建目录
+
+使用 *clean-webpack-plugin*
+
+```javascript
+const { cleanWebpackPlugin } = require('clean-webpack-plugin');
+
+module.exports = {
+  plugin: {
+    new cleanWebpackPlugin()
+  }
+}
+```
+
+### 自动添加 *css* 前缀
+
+使用 *PostCSS* *autoprefixer* 自动添加 *css* 前缀
+
+安装 *postcss-loader* 和 *autoprefixer*
+
+```javascript
+npm i postcss-loader autoperfixer -D
+```
+
+配置
+
+```javascript
+module.exports = {
+  module: [
+    {
+      test: /\.less$/,
+      use: [
+        MiniCssExtractPlugin.loader(),
+        'css-loader',
+        'less-loader',
+        {
+          loader: 'postcss-loader',
+          options: {
+            plugins: [
+              require('autoprefixer')({
+                overrideBrowserslist: [
+                  'last 2 version',
+                  ">1%",
+                ]
+              })
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  plugin: [
+    new MiniCssExtractPlugin({
+      filename: '[name]_[contenthash:8].css'
+    })
+  ]
+}
+```
+
+### *css pxtorem*
+
+方案: *lib-flexible* *pxtorem*
