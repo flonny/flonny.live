@@ -23,7 +23,8 @@ module.exports = {
           children: [
             '',
             'vue-next',
-            'webpack'
+            'webpack',
+            'entity'
           ]
         }
       ],
