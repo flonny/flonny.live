@@ -6,60 +6,21 @@ module.exports = {
   themeConfig: {
     smoothScroll: true,
     nav: [
+      { text: 'HTML', link: '/html/' },
       { text: 'JavaScript', link: '/javascript/' },
       { text: 'CSS', link: '/css/' },
-      { text: 'Flutter', link: '/flutter/' },
-      { text: '笔记', link: '/notes/' },
-      { text: '素材', link: '/material/' },
       { text: 'github', link: 'https://github.com/flonny', target: '_blank', rel: '' },
     ],
     sidebar: {
       sidebarDepth: 2,
-      '/javascript/': [
+      '/html/': [
         {
-          title: 'JavaScript',
+          title: 'HTML',
           collapsable: false,
           sidebarDepth: 2,
           children: [
             '',
-            'vue-next',
-            'webpack',
-            'entity'
-          ]
-        }
-      ],
-
-      '/notes/': [
-        {
-          title: '笔记',
-          collapsable: false,
-          sidebarDepth: 2,
-          children: [
-            '',
-            'javascript',
-            'css',
-            'worker'
-
-          ]
-        }
-      ],
-      '/css/': [
-        {
-          title: 'CSS',
-          collapsable: false,
-          sidebarDepth: 2,
-          children: [
-            '',
-          ]
-        }
-      ],
-      '/material/': [
-        {
-          title: '素材',
-          collapsable: false,
-          sidebarDepth: 2,
-          children: [
-            ''
+            ['entity', 'entity(实体)']
           ]
         }
       ],
