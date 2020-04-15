@@ -1,4 +1,4 @@
-# 实体
+# XML 实体
 
 ::: warning
 统计时未注意细节, 这些统计的实体都是 `xml` 实体, 不是 `sgml` 的, 多谢一位微信群中的同学指正🙏.
@@ -22,7 +22,7 @@
 ## entity（没有类型）
 <View-Entity />
 
-## sgml entity
+# SGML Entity
 
 > 资料来源 [http://xml.coverpages.org/ncbiEntities.html](http://xml.coverpages.org/ncbiEntities.html) 
 
