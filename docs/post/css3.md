@@ -67,9 +67,9 @@
 
 在想想里面属性,就觉的这道题很难,问的这么普遍显得有点苛刻
 
-![image-20200426011954766](/Users/fan/Documents/flonny/flonny.live/docs/post/css3/image-20200426011954766.png)
+![image-20200426011954766](./css3/image-20200426011954766.png)
 
-![image-20200426012107112](/Users/fan/Documents/flonny/flonny.live/docs/post/css3/image-20200426012107112.png)
+![image-20200426012107112](./css3/image-20200426012107112.png)
 
 ## 那些新增的属性
 
