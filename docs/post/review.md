@@ -55,3 +55,13 @@ margin 越界应该指的是 margin 合并中的父子元素的外边距重叠�
 }
 ```
 
+# es6 参数解构
+
+```javascript
+const sum = (...args) {
+	return args.reduce((a,b) => {
+       return a+b 
+    },0)
+}
+```
+
